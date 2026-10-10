@@ -133,3 +133,5 @@ These are not changes to the blueprint; they make ambiguous points concrete befo
 | 2026-10-09 | M1 | Python 3.14.3 instead of proposed 3.12 | 3.12 not installed; 3.14 supported by all pinned packages | None on methods; versions recorded in `requirements.lock` |
 
 Further entries are appended as they occur (see also `docs/implementation_log.md`).
+| 2026-10-09 | M7 | Seaborn installed (blueprint stack) but not used; figures drawn with Matplotlib directly | Fine-grained control over interval styles and labels | None on results; not claimed as a used tool |
+| 2026-10-09 | M7 | One supplementary figure (hypothetical economics, Panels A and B) added to the seven planned figures | Panels must be shown separately and labeled hypothetical | Seven planned figures unchanged |

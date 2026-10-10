@@ -1,0 +1,44 @@
+{
+  "README.md": {
+    "numbers_checked": 13,
+    "allowlisted": {},
+    "unmatched": []
+  },
+  "reports/executive_memo.md": {
+    "numbers_checked": 39,
+    "allowlisted": {},
+    "unmatched": []
+  },
+  "reports/technical_report.md": {
+    "numbers_checked": 904,
+    "allowlisted": {
+      "97.5": "interval level of the Bonferroni simultaneous CI (method constant)"
+    },
+    "unmatched": []
+  },
+  "docs/case_study.md": {
+    "numbers_checked": 36,
+    "allowlisted": {},
+    "unmatched": []
+  },
+  "docs/interview_prep.md": {
+    "numbers_checked": 52,
+    "allowlisted": {
+      "$29.99": "illustrative history value in an interview example (observed minimum history; planning record)",
+      "97.5": "interval level of the Bonferroni simultaneous CI (method constant)"
+    },
+    "unmatched": []
+  },
+  "docs/evidence_ledger.md": {
+    "numbers_checked": 36,
+    "allowlisted": {
+      "97.5": "interval level of the Bonferroni simultaneous CI (method constant)"
+    },
+    "unmatched": []
+  },
+  "docs/resume_bullets.md": {
+    "numbers_checked": 10,
+    "allowlisted": {},
+    "unmatched": []
+  }
+}

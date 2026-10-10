@@ -1,0 +1,14 @@
+{
+  "source": "git working tree (tracked + untracked-not-ignored)",
+  "files_checked": 117,
+  "problems": [],
+  "passed": true,
+  "checks": [
+    "forbidden paths (raw data, databases, private artifacts, models, notebooks, env, outputs)",
+    ">3 concrete row IDs or row ID with partition label",
+    "raw CSV header followed by data / raw-format data lines",
+    "row-level CSV columns",
+    "tables over 2000 rows",
+    "files over 5 MB"
+  ]
+}

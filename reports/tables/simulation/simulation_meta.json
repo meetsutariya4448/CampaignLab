@@ -1,0 +1,15 @@
+{
+  "coverage_diagnostic_range": [
+    0.92,
+    0.98
+  ],
+  "estimator_repetitions": 1000,
+  "label": "SYNTHETIC",
+  "n_per_rep": 6000,
+  "pipeline_n_per_rep": 12000,
+  "pipeline_repetitions_per_scenario": 200,
+  "runtime_seconds": 334.1,
+  "seed_stream": "simulation",
+  "truth_note": "Superpopulation truth averaged over 400,000 synthetic covariate draws; its Monte Carlo error is far below the per-rep SE.",
+  "truth_population_draws": 400000
+}

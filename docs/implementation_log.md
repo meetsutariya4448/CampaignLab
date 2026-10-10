@@ -16,7 +16,7 @@ Chronological record of milestones, artifacts, checks, deviations and remaining 
 
 ## M2 — Validation, split and SQL (complete)
 
-- Python typed contract and DuckDB SQL contract (`sql/01_validate.sql`) both report **zero hard-check failures** (25 named checks).
+- Python typed contract and DuckDB SQL contract (`sql/01_validate.sql`) both report **zero hard-check failures** (23 named checks: 20 run in both Python and SQL, plus 3 SQL split-reconciliation checks).
 - Quality facts reproduce the planning record exactly: arms 21,306 / 21,307 / 21,387; 9,394 visits; 578 conversions; 578 positive-spend rows; 1,072 full-row matching groups, 6,562 excess rows (7,634 rows involved, largest group 31); 56,209 distinct pre-treatment profiles (7,791 excess, largest 83); 5 history-bucket boundary cases (rounded 100 ×2, 200 ×2, 500 ×1). All retained.
 - SQL and Python agree on all global counts, total history cents and split totals.
 - Split executed exactly as frozen: **TRAIN 38,399 / VALIDATION 12,799 / TEST 12,802** (by arm 12,783/4,261/4,262; 12,784/4,261/4,262; 12,832/4,277/4,278); disjoint and complete; private manifest with membership checksum.
@@ -24,9 +24,6 @@ Chronological record of milestones, artifacts, checks, deviations and remaining 
 - Code-level access control: development stages can load TRAIN/VALIDATION outcomes only; TEST needs a verified-lock token; full sample needs an evaluation-complete record; each outcome load is logged.
 - Tests at this point: `test_data.py` 28 passed (incl. private pinned-artifact test), `test_inference.py` 19, `test_models.py` + `test_policy.py` 35, `test_pipeline.py` 1 (synthetic end-to-end access/lock test) — 83 passed.
 
-## Remaining work
-
-M3–M9 (below as they complete).
 
 ## M3–M4 — Development inference (complete, provisional)
 
@@ -69,3 +66,17 @@ M3–M9 (below as they complete).
 - Primary ITT, N = 64,000: M − 0 **+7.66 pp** (95% 7.00 to 8.32; Bonferroni 97.5% 6.90 to 8.42); W − 0 **+4.52 pp** (95% 3.89 to 5.16; Bonferroni 3.80 to 5.25); Holm p 5.5e−113 and 1.9e−44.
 - Secondary: conversion +0.68 pp (M), +0.31 pp (W); spend per assigned customer +$0.77 (M), +$0.42 (W). Bootstrap, HC2/HC3 adjustment and profile clustering agree closely; all-row winsorization changes the estimand (+$0.32 / +$0.16).
 - Exploratory heterogeneity: purchase profile modifies effects (W−0: 1.1 pp mens-only vs 7.4 pp womens-only), newbie and channel do not detectably.
+
+- Disclosure: while auditing the S/T selection boundary (after `select`, before `lock`) the VALIDATION outcomes were re-read once by an ad-hoc audit (access-log stage `select-audit`). VALIDATION access is permitted at that stage; nothing was changed as a result.
+
+## M7 — Figures, memo, technical report, case study (complete)
+
+- `reporting.py` renders seven required figures plus one supplementary hypothetical-economics figure as PNG (200 dpi) and SVG from the aggregate CSV/JSON tables only. Palette validated with the dataviz validator (blue/orange/aqua pass light-mode categorical checks; aqua is below 3:1 contrast so values are always labeled in text). Figures were rendered and inspected; overlapping legends and labels were fixed.
+- `report_text.py` generates `reports/executive_memo.md`, `reports/technical_report.md` and `README.md` from the tables; interpretive sentences are selected from the computed decision categories so wording cannot contradict results.
+- Hand-written portfolio documents (`docs/case_study.md`, `docs/interview_prep.md`, `docs/evidence_ledger.md`) quote only table values. `scripts/audit_claims.py` reconciles every decimal quoted in public narrative documents against the tables (all match; two method constants allowlisted: the 97.5% interval level and an illustrative $29.99 history value). One count was corrected by this review: the contract has 23 named checks, not 25.
+- No dashboard was built: the questions are fixed contrasts and a conditional recommendation that the static report answers; an app would add scope without scientific value.
+
+## Simulation correction (synthetic validation)
+
+- A first simulation run labeled a scenario `"null"`, which pandas reads as missing; it was renamed `no_effect`. A ~3-MC-SE apparent bias in one scenario was investigated with 3,000 fresh repetitions (bias −0.00024, z = −1.2): Monte Carlo noise, not an estimator bug. A `bias_z` column was added so each row's bias is judged against its simulation error.
+- Final simulation (`simulate`, 327 s): with valid randomization, coverage 0.926–0.971 and two-sided null rejection 0.045–0.074 across estimators; Holm family-wise rate under the null 0.056; whole-pipeline coverage of the selected policy's true value 0.960 (no effect) and 0.955 (sign-changing heterogeneity), 200 repetitions each. One valid-randomization row (misspecified response, ATE W−0) had bias z = −3.39; an independent 5,000-repetition rerun (seed 2468, not a published artifact) gave z = +2.58 for the same estimand and +0.09 for M−0, so the row is disclosed as Monte Carlo noise. The broken-allocation scenario was detected (bias z between −123 and +15 for the affected estimands).

@@ -27,3 +27,28 @@ Chronological record of milestones, artifacts, checks, deviations and remaining 
 ## Remaining work
 
 M3–M9 (below as they complete).
+
+## M3–M4 — Development inference (complete, provisional)
+
+- `develop` stage loaded only DEVELOPMENT outcomes (N = 51,198; access log). Development SQL (`02_development_summary.sql`) and Python agree on counts, cents and means.
+- Provisional primary ITT (visit): M − 0 = +7.57 pp (95% CI 6.83 to 8.31), W − 0 = +4.71 pp (3.99 to 5.42); Holm-adjusted p < 1e−37 for both. Covariate adjustment (HC2/HC3), profile clustering and the stratified bootstrap left these essentially unchanged.
+- Spend-tail thresholds frozen from TRAIN: all-row 99.5th percentile = 60.7803; positive-spend 99.5th percentile = 499.00 (equal to the maximum, so the supplementary winsorization caps no rows; reported as such).
+- Exploratory: no row has mens = 0 and womens = 0, so the purchase-profile grouping has three non-empty cells (the "neither" cell is empty).
+
+## M5 — TRAIN fitting (complete)
+
+- S-learner: TRAIN-CV selected C = 0.1 (mean log loss 0.398788; C grid differences < 3e−5); converged.
+- T-learner: all 48 support-gate checks passed; C = 1.0; all fits converged → included (polished scope).
+- Development-only diagnostics: profile-grouped CV log loss 0.398691 (no evidence of memorization through matching profiles); coarse history encoding 0.398976; main-effects-only ablation gives a constant policy (100% Mens E-Mail on VALIDATION), confirming the need for interactions; 20 development resplits give S-learner minus best-constant differences between −0.73 and +0.84 pp (each SE ≈ 0.5 pp).
+
+## M6a — VALIDATION selection (complete)
+
+- C* = **const_M** (VALIDATION values: 0 → 0.1058, M → 0.1847, W → 0.1564).
+- Targeting values: fixed rule 0.1743, S-learner 0.1864, T-learner 0.1866. π* = **S-learner** under the frozen one-paired-SE simplicity rule.
+- **Boundary note:** S and T actions differ on 14 of 12,799 VALIDATION rows, producing one discordant matched visit; the T − S gap and its paired SE are then both exactly 1/n_W (floating difference 8.5e−18). The frozen rule ("within one paired SE", implemented as ≤) makes S eligible; no code was changed after this was observed.
+
+## M6b — Lock (complete)
+
+- `artifacts/private/lock_manifest.json`, SHA-256 `59e7e741399d518b325e7306c323ed19391cc4a259e0f9736ef24d4e3a9dd0ec`, created 2026-10-10T01:03:14Z (UTC).
+- Records dataset/provenance/split hashes, 11 code/SQL hashes, config hash, environment, model parameter hashes, selections (π* = s_learner, C* = const_M), δ = 0.005, grids, economics, uncertainty protocol/seeds, DR nuisance (S-learner), frozen thresholds and checksums of 66 TEST action vectors and all TEST predictions.
+- Access log at lock time contains only `development`, `train`, `validation` and development-SQL scopes.

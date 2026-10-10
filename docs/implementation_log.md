@@ -80,3 +80,16 @@ Chronological record of milestones, artifacts, checks, deviations and remaining 
 
 - A first simulation run labeled a scenario `"null"`, which pandas reads as missing; it was renamed `no_effect`. A ~3-MC-SE apparent bias in one scenario was investigated with 3,000 fresh repetitions (bias −0.00024, z = −1.2): Monte Carlo noise, not an estimator bug. A `bias_z` column was added so each row's bias is judged against its simulation error.
 - Final simulation (`simulate`, 327 s): with valid randomization, coverage 0.926–0.971 and two-sided null rejection 0.045–0.074 across estimators; Holm family-wise rate under the null 0.056; whole-pipeline coverage of the selected policy's true value 0.960 (no effect) and 0.955 (sign-changing heterogeneity), 200 repetitions each. One valid-randomization row (misspecified response, ATE W−0) had bias z = −3.39; an independent 5,000-repetition rerun (seed 2468, not a published artifact) gave z = +2.58 for the same estimand and +0.09 for M−0, so the row is disclosed as Monte Carlo noise. The broken-allocation scenario was detected (bias z between −123 and +15 for the affected estimands).
+
+## M8 — Reproducibility and publication review (complete)
+
+- Test suite: **85 passed** (data 28, inference 19, models 11, policy 24, end-to-end pipeline 1, slow simulation 2).
+- Clean rerun (`scripts/clean_rerun.sh`): fresh clone of `76bebc8`, fresh venv from `requirements.lock`, fresh publisher download (hash matched), all stages, simulation and tests. 85 passed. `scripts/compare_runs.py` found 75 byte-identical report artifacts, 6 identical apart from timestamps/retrieval metadata, and 1 table within 2.8e−13 (DuckDB parallel float aggregation). No deterministic artifact differed, and the lock's code, model, prediction and 66 action checksums were identical. The comparator was refined once to exclude the provenance-manifest hash, which embeds download time and headers (documented in the script). Details: `docs/reproduction.md`.
+- Publication audit (`scripts/audit_public.py`) passed on the working tree and on the ZIP. Positive controls (the raw CSV and the private split manifest) are flagged by the same rules. Claims audit: 0 unmatched numbers.
+- Locked-code integrity: after evaluation, the hashes of the locked modules, config and environment lock still equal the lock manifest.
+
+## M9 — Portfolio and interview evidence (complete)
+
+- `docs/evidence_ledger.md` (24 claims to artifacts), `docs/resume_bullets.md` (three drafts; no real resume edited), `docs/interview_prep.md` (overview, walkthrough, deep dive, 36 questions, 10 hardest), `docs/final_quality_audit.md`.
+- Deliverables assembled in `outputs/CampaignLab_Final/` with `scripts/package_deliverables.sh`; ZIP built from tracked files by `git archive`.
+- Not done (optional, out of scope): AUUC/Qini, a Tableau/Streamlit view, and an exploration notebook. No push, deployment, cloud resource, email or resume edit occurred.

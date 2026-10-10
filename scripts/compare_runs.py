@@ -9,7 +9,10 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-TIMESTAMP_KEYS = {"created_utc", "completed_utc", "retrieved_utc", "retrieval", "runtime_seconds", "utc"}
+# Timestamps and retrieval metadata legitimately change on every fresh run/download. The provenance
+# manifest's own hash is excluded from the lock comparison because the manifest embeds retrieval
+# time/headers; the manifest contents (bytes, SHA-256 of the data, URLs) are still compared.
+TIMESTAMP_KEYS = {"created_utc", "completed_utc", "retrieved_utc", "retrieval", "runtime_seconds", "utc", "provenance_manifest_sha256"}
 
 
 def strip(o):

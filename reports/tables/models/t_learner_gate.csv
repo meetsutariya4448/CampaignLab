@@ -1,0 +1,49 @@
+check,value,passed
+arm 0 visits >= 100,1364,True
+arm 0 non-visits >= 100,11419,True
+arm 0 mens=0 visits/non-visits >= 20/20,564/5096,True
+arm 0 mens=1 visits/non-visits >= 20/20,800/6323,True
+arm 0 womens=0 visits/non-visits >= 20/20,555/5256,True
+arm 0 womens=1 visits/non-visits >= 20/20,809/6163,True
+arm 0 newbie=0 visits/non-visits >= 20/20,864/5463,True
+arm 0 newbie=1 visits/non-visits >= 20/20,500/5956,True
+arm 0 channel_Web=0 visits/non-visits >= 20/20,703/6490,True
+arm 0 channel_Web=1 visits/non-visits >= 20/20,661/4929,True
+arm 0 channel_Multichannel=0 visits/non-visits >= 20/20,1153/10050,True
+arm 0 channel_Multichannel=1 visits/non-visits >= 20/20,211/1369,True
+arm 0 zip_Urban=0 visits/non-visits >= 20/20,864/6762,True
+arm 0 zip_Urban=1 visits/non-visits >= 20/20,500/4657,True
+arm 0 zip_Surburban=0 visits/non-visits >= 20/20,789/6230,True
+arm 0 zip_Surburban=1 visits/non-visits >= 20/20,575/5189,True
+arm 1 visits >= 100,2318,True
+arm 1 non-visits >= 100,10466,True
+arm 1 mens=0 visits/non-visits >= 20/20,970/4841,True
+arm 1 mens=1 visits/non-visits >= 20/20,1348/5625,True
+arm 1 womens=0 visits/non-visits >= 20/20,933/4744,True
+arm 1 womens=1 visits/non-visits >= 20/20,1385/5722,True
+arm 1 newbie=0 visits/non-visits >= 20/20,1340/5062,True
+arm 1 newbie=1 visits/non-visits >= 20/20,978/5404,True
+arm 1 channel_Web=0 visits/non-visits >= 20/20,1221/5869,True
+arm 1 channel_Web=1 visits/non-visits >= 20/20,1097/4597,True
+arm 1 channel_Multichannel=0 visits/non-visits >= 20/20,1993/9246,True
+arm 1 channel_Multichannel=1 visits/non-visits >= 20/20,325/1220,True
+arm 1 zip_Urban=0 visits/non-visits >= 20/20,1410/6230,True
+arm 1 zip_Urban=1 visits/non-visits >= 20/20,908/4236,True
+arm 1 zip_Surburban=0 visits/non-visits >= 20/20,1365/5742,True
+arm 1 zip_Surburban=1 visits/non-visits >= 20/20,953/4724,True
+arm 2 visits >= 100,1958,True
+arm 2 non-visits >= 100,10874,True
+arm 2 mens=0 visits/non-visits >= 20/20,988/4825,True
+arm 2 mens=1 visits/non-visits >= 20/20,970/6049,True
+arm 2 womens=0 visits/non-visits >= 20/20,656/5092,True
+arm 2 womens=1 visits/non-visits >= 20/20,1302/5782,True
+arm 2 newbie=0 visits/non-visits >= 20/20,1128/5302,True
+arm 2 newbie=1 visits/non-visits >= 20/20,830/5572,True
+arm 2 channel_Web=0 visits/non-visits >= 20/20,1003/6170,True
+arm 2 channel_Web=1 visits/non-visits >= 20/20,955/4704,True
+arm 2 channel_Multichannel=0 visits/non-visits >= 20/20,1685/9600,True
+arm 2 channel_Multichannel=1 visits/non-visits >= 20/20,273/1274,True
+arm 2 zip_Urban=0 visits/non-visits >= 20/20,1213/6551,True
+arm 2 zip_Urban=1 visits/non-visits >= 20/20,745/4323,True
+arm 2 zip_Surburban=0 visits/non-visits >= 20/20,1075/5905,True
+arm 2 zip_Surburban=1 visits/non-visits >= 20/20,883/4969,True

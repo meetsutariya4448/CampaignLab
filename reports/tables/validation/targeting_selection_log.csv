@@ -1,0 +1,4 @@
+candidate,validation_value,gap_to_best,paired_se_vs_best,status,eligible_within_one_se
+fixed_rule,0.1743013736003095,0.01233013267946631,0.0050140861224242045,ok,False
+s_learner,0.18639769753532878,0.0002338087444470338,0.00023380874444704235,ok,True
+t_learner,0.18663150627977582,0.0,0.0,identical_policies,True

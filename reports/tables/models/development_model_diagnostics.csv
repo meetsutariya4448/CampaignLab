@@ -1,0 +1,6 @@
+diagnostic,C,mean_logloss
+"S-learner, arm-stratified 3-fold CV (selected C)",0.1,0.3987878845172749
+"S-learner, profile-grouped 3-fold CV (identical profiles kept together)",0.1,0.3986910386480204
+S-learner with history_segment indicators instead of log(1+history) (encoding diagnostic),0.1,0.39897554595244045
+Main-effects-only S-learner (instructional ablation),0.1,0.3995268762270692
+"Main-effects-only S-learner VALIDATION action shares at q=1,kappa=0: {'No E-Mail': 0.0, 'Mens E-Mail': 1.0, 'Womens E-Mail': 0.0}",0.1,

@@ -1,0 +1,45 @@
+{
+  "constant_comparator": "const_M",
+  "constant_selection": {
+    "rule": "max VALIDATION IPW value; ties within 1e-06 prefer order [0, 1, 2]",
+    "selected": 1,
+    "values": {
+      "0": 0.10584369866228585,
+      "1": 0.18469842759915514,
+      "2": 0.1564180500350713
+    }
+  },
+  "pi_star": "s_learner",
+  "selected_on": "VALIDATION outcomes only",
+  "targeting_selection": {
+    "best_by_value": "t_learner",
+    "log": [
+      {
+        "candidate": "fixed_rule",
+        "eligible_within_one_se": false,
+        "gap_to_best": 0.01233013267946631,
+        "paired_se_vs_best": 0.0050140861224242045,
+        "status": "ok",
+        "validation_value": 0.1743013736003095
+      },
+      {
+        "candidate": "s_learner",
+        "eligible_within_one_se": true,
+        "gap_to_best": 0.0002338087444470338,
+        "paired_se_vs_best": 0.00023380874444704235,
+        "status": "ok",
+        "validation_value": 0.18639769753532878
+      },
+      {
+        "candidate": "t_learner",
+        "eligible_within_one_se": true,
+        "gap_to_best": 0.0,
+        "paired_se_vs_best": 0.0,
+        "status": "identical_policies",
+        "validation_value": 0.18663150627977582
+      }
+    ],
+    "rule": "within one paired SE of the best VALIDATION value; prefer fixed_rule, then s_learner, then t_learner",
+    "selected": "s_learner"
+  }
+}

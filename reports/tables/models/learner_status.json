@@ -1,0 +1,15 @@
+{
+  "s_learner": {
+    "C": 0.1,
+    "converged": true,
+    "included": true,
+    "model_sha256": "d70d477765ead216e212598d10c6fbdcb920f0b6c43241b5094920779877d474"
+  },
+  "t_learner": {
+    "C": 1.0,
+    "converged": true,
+    "included": true,
+    "model_sha256": "11a050d66745fd2bc74de87e55e3ba2b128b45c6244643c398a748a06ea95fb7"
+  },
+  "t_learner_gate_support_passed": true
+}

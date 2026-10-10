@@ -1,0 +1,22 @@
+# Private / row-level artifacts: never published (data rights unresolved)
+data/
+artifacts/private/
+artifacts/dev/
+*.duckdb
+*.duckdb.wal
+*.pkl
+*.pickle
+*.joblib
+*.parquet
+*.csv.gz
+
+# Environment and caches
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.egg-info/
+.ipynb_checkpoints/
+.DS_Store
+build/
+dist/

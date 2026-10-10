@@ -1,0 +1,153 @@
+# CampaignLab frozen analysis configuration (SAP v1.0).
+# Frozen at M0 on 2026-10-09, before any arm-specific outcome exploration, split-level
+# outcome summary or model selection. Changes after the freeze must be recorded in
+# docs/analysis_plan.md (deviation log). Values here are read by every pipeline stage.
+
+plan_version: "SAP v1.0"
+frozen_on: "2026-10-09"
+blueprint_reference: "outputs/CampaignLab_Project_Blueprint (documents 01-12, hashes in blueprint_quality_audit.json)"
+
+dataset:
+  id: "hillstrom-2008-v1"
+  source_url: "http://www.minethatdata.com/Kevin_Hillstrom_MineThatData_E-MailAnalytics_DataMiningChallenge_2008.03.20.csv"
+  article_url: "https://blog.minethatdata.com/2008/03/minethatdata-e-mail-analytics-and-data.html"
+  expected_sha256: "0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece"
+  expected_bytes: 3964977
+  expected_rows: 64000
+  expected_columns: [recency, history_segment, history, mens, womens, zip_code, newbie, channel, segment, visit, conversion, spend]
+  raw_path: "data/raw/Kevin_Hillstrom_MineThatData_E-MailAnalytics_DataMiningChallenge_2008.03.20.csv"
+  database_path: "data/processed/campaignlab.duckdb"
+  encoding: "utf-8-sig"
+  allowed:
+    zip_code: [Urban, Surburban, Rural]          # source spelling "Surburban" preserved
+    channel: [Phone, Web, Multichannel]
+    segment: ["No E-Mail", "Mens E-Mail", "Womens E-Mail"]
+    history_segment: ["1) $0 - $100", "2) $100 - $200", "3) $200 - $350", "4) $350 - $500", "5) $500 - $750", "6) $750 - $1,000", "7) $1,000 +"]
+    recency_min: 1
+    recency_max: 12
+  display_aliases:
+    zip_code: {Surburban: "Suburban (source: Surburban)"}
+  # Quality facts already inspected during planning (disclosed; not outcome-by-arm results).
+  expected_quality:
+    arm_counts: {"No E-Mail": 21306, "Mens E-Mail": 21307, "Womens E-Mail": 21387}
+    global_visits: 9394
+    global_conversions: 578
+    positive_spend_rows: 578
+    full_row_match_groups: 1072
+    full_row_match_excess: 6562
+    full_row_match_rows_involved: 7634
+    largest_full_row_group: 31
+    distinct_pretreatment_profiles: 56209
+    pretreatment_profile_excess: 7791
+    largest_profile_group: 83
+    history_bucket_boundary_disagreements: 5
+
+arms:
+  control: "No E-Mail"
+  # integer action codes used by policies and evaluation
+  codes: {"No E-Mail": 0, "Mens E-Mail": 1, "Womens E-Mail": 2}
+  short: {0: "0", 1: "M", 2: "W"}
+
+split:
+  key_template: "CampaignLab/split/v1/2027/{row_id}"
+  train_percent: 60
+  validation_percent: 20
+  expected_totals: {TRAIN: 38399, VALIDATION: 12799, TEST: 12802}
+  expected_by_arm:
+    "No E-Mail": {TRAIN: 12783, VALIDATION: 4261, TEST: 4262}
+    "Mens E-Mail": {TRAIN: 12784, VALIDATION: 4261, TEST: 4262}
+    "Womens E-Mail": {TRAIN: 12832, VALIDATION: 4277, TEST: 4278}
+
+outcomes:
+  primary: visit
+  secondary: [conversion, spend]
+  window: "two-week follow-up (publisher definition)"
+
+inference:
+  alpha: 0.05
+  primary_family:
+    method: holm
+    contrasts: [["visit", "Mens E-Mail"], ["visit", "Womens E-Mail"]]
+  simultaneous_interval: {method: bonferroni, family_size: 2, two_sided_level: 0.975}
+  secondary_family:
+    method: holm
+    contrasts: [["conversion", "Mens E-Mail"], ["conversion", "Womens E-Mail"], ["spend", "Mens E-Mail"], ["spend", "Womens E-Mail"]]
+  descriptive_contrast: ["Womens E-Mail", "Mens E-Mail"]   # exploratory W-M, not primary
+  ols_covariance: HC2
+  ols_covariance_sensitivity: HC3
+  bootstrap_development_replicates: 2000
+  bootstrap_final_replicates: 5000
+  bootstrap_percentiles: [2.5, 97.5]
+  permutation_draws: 9999
+  smd_reference: 0.1
+  subgroup_min_rows: 200
+  subgroup_min_visits: 20
+  # Spend-tail sensitivity. Primary reading of SAP S10: 99.5th percentile of TRAIN spend over
+  # all assigned TRAIN rows (zeros retained). Supplementary: 99.5th percentile of positive TRAIN
+  # spend. Both thresholds are estimated on TRAIN in the develop stage and then frozen.
+  winsor_quantile: 0.995
+  heterogeneity_groupings: [newbie, purchase_profile]
+  heterogeneity_optional_groupings: [channel]
+
+features:
+  raw: [recency, history, mens, womens, newbie, channel, zip_code]
+  excluded: [history_segment]
+  channel_levels: [Phone, Web, Multichannel]
+  channel_reference: Phone
+  zip_levels: [Rural, Urban, Surburban]
+  zip_reference: Rural
+  basis: [recency, log_history, mens, womens, newbie, channel_Web, channel_Multichannel, zip_Urban, zip_Surburban]
+  standardized: [recency, log_history]
+
+models:
+  C_grid: [0.1, 1.0, 10.0]
+  cv_folds: 3
+  tol: 1.0e-6
+  max_iter: 2000
+  tie_tolerance: 1.0e-6
+  t_learner_gate:
+    min_visits_per_arm: 100
+    min_nonvisits_per_arm: 100
+    min_level_visits: 20          # every binary/one-hot basis level, each TRAIN arm
+    min_level_nonvisits: 20
+
+policy:
+  main: {q: 1.0, kappa: 0.0}
+  q_grid: [0.0, 0.25, 0.5, 0.75, 1.0]
+  kappa_grid: [0.0, 0.005, 0.02, 0.05]
+  tiebreak_key_template: "CampaignLab/policy-tiebreak/v1/{row_id}"
+  baseline_key_template: "CampaignLab/contact-baseline-v1/{row_id}"
+  constant_tie_order: [0, 1, 2]
+  targeting_simplicity_order: [fixed_rule, s_learner, t_learner]
+  practical_margin_delta: 0.005
+
+evaluation:
+  bootstrap_replicates: 5000
+  stability_extra_replicates: 5000
+  bootstrap_batch: 250
+  ordinary_level: 0.95
+  constant_family_alpha: 0.05
+  constant_family_size: 3
+  stability_target_pp: 0.1
+
+economics:
+  panel_a:
+    value_per_visit_b: [0.25, 1.0, 2.0]   # c = b * kappa
+  panel_b:
+    margin_m: [0.1, 0.3, 0.5]
+    contact_cost_c: [0.0, 0.01, 0.05]
+
+development_diagnostics:
+  stability_resplits: 20
+  stability_key_template: "CampaignLab/dev-stability/v1/{k}/{row_id}"
+
+simulation:
+  repetitions: 1000
+  n_per_rep: 6000
+  pipeline_repetitions: 200
+  coverage_diagnostic_range: [0.92, 0.98]
+
+seeds:
+  primary: 2027
+  # purpose-specific streams: numpy SeedSequence(primary, spawn_key=(index,))
+  streams: {cv: 0, bootstrap_development: 1, bootstrap_final: 2, bootstrap_stability: 3, permutation: 4, simulation: 5, policy_bootstrap: 6, policy_bootstrap_stability: 7, dev_stability: 8, validation_bootstrap: 9}

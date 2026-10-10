@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "campaignlab"
+version = "1.0.0"
+description = "Retrospective ITT analysis and held-out policy evaluation of the Hillstrom (2008) email experiment"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.12"
+dependencies = [
+  "numpy>=2.0",
+  "pandas>=2.2",
+  "scipy>=1.13",
+  "statsmodels>=0.14.2",
+  "scikit-learn>=1.8",
+  "duckdb>=1.1",
+  "matplotlib>=3.8",
+  "seaborn>=0.13",
+  "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+campaignlab = "campaignlab.run:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "private_data: requires the privately acquired Hillstrom CSV and built database",
+  "slow: Monte Carlo / known-truth simulation tests",
+]
+addopts = "-ra"

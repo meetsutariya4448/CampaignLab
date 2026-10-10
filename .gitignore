@@ -1,7 +1,7 @@
 # Private / row-level artifacts: never published (data rights unresolved)
-data/
-artifacts/private/
-artifacts/dev/
+/data/
+/artifacts/private/
+/artifacts/dev/
 *.duckdb
 *.duckdb.wal
 *.pkl
@@ -20,3 +20,6 @@ __pycache__/
 .DS_Store
 build/
 dist/
+
+# Final deliverable copies (assembled from reports/ and docs/)
+/outputs/

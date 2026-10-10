@@ -1,0 +1,65 @@
+{
+  "bytes": 3964977,
+  "columns": 12,
+  "dataset_sha256": "0e5893329d8b93cefecc571777672028290ab69865718020c78c7284f291aece",
+  "exclusions": "none (all 64,000 rows retained; matching rows and bucket-boundary cases kept)",
+  "quality": {
+    "arm_counts": {
+      "Mens E-Mail": 21307,
+      "No E-Mail": 21306,
+      "Womens E-Mail": 21387
+    },
+    "distinct_pretreatment_profiles": 56209,
+    "full_row_match_excess": 6562,
+    "full_row_match_groups": 1072,
+    "full_row_match_rows_involved": 7634,
+    "global_conversions": 578,
+    "global_visits": 9394,
+    "history_bucket_boundary_disagreements": 5,
+    "largest_full_row_group": 31,
+    "largest_profile_group": 83,
+    "positive_spend_rows": 578,
+    "pretreatment_profile_excess": 7791,
+    "rows": 64000
+  },
+  "rows": 64000,
+  "scope_note": "Global contract counts only; no arm-by-outcome summary is produced at this stage.",
+  "split": {
+    "by_arm": {
+      "Mens E-Mail": {
+        "TEST": 4262,
+        "TRAIN": 12784,
+        "VALIDATION": 4261
+      },
+      "No E-Mail": {
+        "TEST": 4262,
+        "TRAIN": 12783,
+        "VALIDATION": 4261
+      },
+      "Womens E-Mail": {
+        "TEST": 4278,
+        "TRAIN": 12832,
+        "VALIDATION": 4277
+      }
+    },
+    "complete": true,
+    "disjoint": true,
+    "totals": {
+      "TEST": 12802,
+      "TRAIN": 38399,
+      "VALIDATION": 12799
+    }
+  },
+  "sql_python_agreement": {
+    "distinct_pretreatment_profiles": true,
+    "full_row_match_excess": true,
+    "full_row_match_groups": true,
+    "global_conversions": true,
+    "global_visits": true,
+    "history_bucket_boundary_disagreements": true,
+    "positive_spend_rows": true,
+    "pretreatment_profile_excess": true,
+    "split_totals": true,
+    "total_history_cents": true
+  }
+}

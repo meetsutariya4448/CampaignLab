@@ -52,3 +52,20 @@ M3–M9 (below as they complete).
 - `artifacts/private/lock_manifest.json`, SHA-256 `59e7e741399d518b325e7306c323ed19391cc4a259e0f9736ef24d4e3a9dd0ec`, created 2026-10-10T01:03:14Z (UTC).
 - Records dataset/provenance/split hashes, 11 code/SQL hashes, config hash, environment, model parameter hashes, selections (π* = s_learner, C* = const_M), δ = 0.005, grids, economics, uncertainty protocol/seeds, DR nuisance (S-learner), frozen thresholds and checksums of 66 TEST action vectors and all TEST predictions.
 - Access log at lock time contains only `development`, `train`, `validation` and development-SQL scopes.
+
+## M6c — Locked TEST evaluation (complete)
+
+- `evaluate` re-verified the lock (all hashes and the 66 action checksums recomputed and matched) and only then loaded TEST outcomes (first `test` access: 2026-10-10T01:03:37Z, 23 s after the lock).
+- π* (S-learner) vs C* (const_M), allocation-normalized IPW, TEST N = 12,802: **−0.44 pp (95% paired CI −1.29 to +0.42)**; paired bootstrap (5,000) −1.28 to +0.41; nominal-1/3 HT −0.42 pp (−1.29 to +0.45); TRAIN-nuisance DR −0.42 pp (−1.22 to +0.38); profile-clustered SE ratio 1.005. Category **"evidence excludes a gain as large as δ = 0.5 pp"** under every sensitivity (not fragile).
+- π* vs const_0: +7.59 pp (6.08 to 9.10); vs const_W: +3.79 pp (2.41 to 5.18). Constant-family one-sided Bonferroni lower bounds: 0 → +5.95 pp, M → −1.36 pp, W → +2.29 pp ⇒ superiority over the constant family is **not** established.
+- Secondary (not selected): fixed rule vs const_M −1.39 pp (−2.64 to −0.14, worse); T-learner identical TEST value to S-learner.
+- Bootstrap stability: largest endpoint change between 5,000 and 10,000 replicates 0.047 pp (target ≤ 0.1 pp).
+- Capacity/cost grid (exploratory): at every q < 1, π* vs the feasible men's hash quota has an interval including zero (e.g. q = 0.25: +0.35 pp, −0.71 to +1.41).
+- No policy, hyperparameter, comparator, feature, threshold or δ was changed after TEST access.
+
+## M6d — Full-sample release (complete)
+
+- Release token issued from the evaluation-complete record; `03_final_experiment_summary.sql` and Python agree.
+- Primary ITT, N = 64,000: M − 0 **+7.66 pp** (95% 7.00 to 8.32; Bonferroni 97.5% 6.90 to 8.42); W − 0 **+4.52 pp** (95% 3.89 to 5.16; Bonferroni 3.80 to 5.25); Holm p 5.5e−113 and 1.9e−44.
+- Secondary: conversion +0.68 pp (M), +0.31 pp (W); spend per assigned customer +$0.77 (M), +$0.42 (W). Bootstrap, HC2/HC3 adjustment and profile clustering agree closely; all-row winsorization changes the estimand (+$0.32 / +$0.16).
+- Exploratory heterogeneity: purchase profile modifies effects (W−0: 1.1 pp mens-only vs 7.4 pp womens-only), newbie and channel do not detectably.

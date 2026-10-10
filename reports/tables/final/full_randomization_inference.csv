@@ -1,0 +1,3 @@
+sample_scope,outcome,contrast,observed_difference,draws,extreme,p_value,null,mechanism
+"FULL SAMPLE (N=64,000) - released after policy lock and TEST evaluation",visit,M - 0,0.07658956365153125,9999,0,0.0001,sharp null of no effect for any unit,assumed complete randomization conditional on arm counts
+"FULL SAMPLE (N=64,000) - released after policy lock and TEST evaluation",visit,W - 0,0.045233106587052985,9999,0,0.0001,sharp null of no effect for any unit,assumed complete randomization conditional on arm counts

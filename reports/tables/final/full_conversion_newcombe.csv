@@ -1,0 +1,3 @@
+sample_scope,contrast,events_treat,n_treat,events_control,n_control,estimate,wald_ci_low,wald_ci_high,newcombe_ci_low,newcombe_ci_high,note
+"FULL SAMPLE (N=64,000) - released after policy lock and TEST evaluation",M - 0,267,21307,122,21306,0.006805006519615695,0.005000129025231786,0.008609884013999603,0.005014344671481533,0.008640723396917826,Newcombe hybrid-score interval: binary-interval sensitivity for sparse conversions
+"FULL SAMPLE (N=64,000) - released after policy lock and TEST evaluation",W - 0,189,21387,122,21306,0.003111057511085258,0.0014986400681705587,0.004723474953999957,0.0015016571318770087,0.00474547131367293,Newcombe hybrid-score interval: binary-interval sensitivity for sparse conversions

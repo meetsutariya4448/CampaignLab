@@ -1,0 +1,62 @@
+{
+  "center": {
+    "channel_Multichannel": 0.12128125,
+    "channel_Web": 0.440890625,
+    "log_history": 5.006653016550853,
+    "mens": 0.55103125,
+    "newbie": 0.50225,
+    "recency": 5.763734375,
+    "womens": 0.54971875,
+    "zip_Surburban": 0.449625,
+    "zip_Urban": 0.400953125
+  },
+  "centered_on": "analyzed-sample covariate means",
+  "columns": [
+    "const",
+    "arm_M",
+    "arm_W",
+    "x_recency",
+    "x_log_history",
+    "x_mens",
+    "x_womens",
+    "x_newbie",
+    "x_channel_Web",
+    "x_channel_Multichannel",
+    "x_zip_Urban",
+    "x_zip_Surburban",
+    "M_x_recency",
+    "M_x_log_history",
+    "M_x_mens",
+    "M_x_womens",
+    "M_x_newbie",
+    "M_x_channel_Web",
+    "M_x_channel_Multichannel",
+    "M_x_zip_Urban",
+    "M_x_zip_Surburban",
+    "W_x_recency",
+    "W_x_log_history",
+    "W_x_mens",
+    "W_x_womens",
+    "W_x_newbie",
+    "W_x_channel_Web",
+    "W_x_channel_Multichannel",
+    "W_x_zip_Urban",
+    "W_x_zip_Surburban"
+  ],
+  "condition_number": 66.85101817759261,
+  "joint_interaction_test_visit": {
+    "HC2": {
+      "df": 18,
+      "p_value": 2.0318027025834652e-22,
+      "statistic": 147.7503909594545
+    },
+    "HC3": {
+      "df": 18,
+      "p_value": 2.100341199077915e-22,
+      "statistic": 147.676110522142
+    }
+  },
+  "n": 64000,
+  "rank": 30,
+  "sample_scope": "FULL SAMPLE (N=64,000) - released after policy lock and TEST evaluation"
+}

@@ -1,0 +1,37 @@
+policy,outcome,arm,n_arm,recommended_share_overall,matched_rows,matched_events,matched_share_of_arm
+const_0,visit,0,4262,1.0,4262,447,1.0
+const_0,visit,M,4262,0.0,0,0,0.0
+const_0,visit,W,4278,0.0,0,0,0.0
+const_0,spend (positive-spend events),0,4262,1.0,4262,25,1.0
+const_0,spend (positive-spend events),M,4262,0.0,0,0,0.0
+const_0,spend (positive-spend events),W,4278,0.0,0,0,0.0
+const_M,visit,0,4262,0.0,0,0,0.0
+const_M,visit,M,4262,1.0,4262,789,1.0
+const_M,visit,W,4278,0.0,0,0,0.0
+const_M,spend (positive-spend events),0,4262,0.0,0,0,0.0
+const_M,spend (positive-spend events),M,4262,1.0,4262,61,1.0
+const_M,spend (positive-spend events),W,4278,0.0,0,0,0.0
+const_W,visit,0,4262,0.0,0,0,0.0
+const_W,visit,M,4262,0.0,0,0,0.0
+const_W,visit,W,4278,1.0,4278,611,1.0
+const_W,spend (positive-spend events),0,4262,0.0,0,0,0.0
+const_W,spend (positive-spend events),M,4262,0.0,0,0,0.0
+const_W,spend (positive-spend events),W,4278,1.0,4278,38,1.0
+fixed_rule,visit,0,4262,0.09998437744102484,416,73,0.09760675739089629
+fixed_rule,visit,M,4262,0.4525074207155132,1938,356,0.45471609572970434
+fixed_rule,visit,W,4278,0.44750820184346196,1902,302,0.44460028050490885
+fixed_rule,spend (positive-spend events),0,4262,0.09998437744102484,416,4,0.09760675739089629
+fixed_rule,spend (positive-spend events),M,4262,0.4525074207155132,1938,25,0.45471609572970434
+fixed_rule,spend (positive-spend events),W,4278,0.44750820184346196,1902,17,0.44460028050490885
+s_learner,visit,0,4262,0.0,0,0,0.0
+s_learner,visit,M,4262,0.7071551320106233,3032,600,0.7114030971374942
+s_learner,visit,W,4278,0.29284486798937664,1241,171,0.2900888265544647
+s_learner,spend (positive-spend events),0,4262,0.0,0,0,0.0
+s_learner,spend (positive-spend events),M,4262,0.7071551320106233,3032,49,0.7114030971374942
+s_learner,spend (positive-spend events),W,4278,0.29284486798937664,1241,11,0.2900888265544647
+t_learner,visit,0,4262,0.0,0,0,0.0
+t_learner,visit,M,4262,0.7062958912669896,3032,600,0.7114030971374942
+t_learner,visit,W,4278,0.29370410873301045,1246,171,0.2912575970079476
+t_learner,spend (positive-spend events),0,4262,0.0,0,0,0.0
+t_learner,spend (positive-spend events),M,4262,0.7062958912669896,3032,49,0.7114030971374942
+t_learner,spend (positive-spend events),W,4278,0.29370410873301045,1246,11,0.2912575970079476

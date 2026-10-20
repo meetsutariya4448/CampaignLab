@@ -1,6 +1,6 @@
 {
   "source": "git working tree (tracked + untracked-not-ignored)",
-  "files_checked": 121,
+  "files_checked": 122,
   "problems": [],
   "passed": true,
   "checks": [

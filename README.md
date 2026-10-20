@@ -1,5 +1,7 @@
 # CampaignLab
 
+Source repository: [CampaignLab](https://github.com/meetsutariya4448/CampaignLab). See [GitHub publication scope](docs/github_publication.md) for included assets and reproduction boundaries.
+
 **Which email campaign should a retailer send, and does a learned targeting policy beat simply sending the best campaign to everyone?** A reproducible retrospective analysis of the publisher-described randomized Hillstrom (2008) email experiment.
 
 > **Bottom line:** Send the men's email to everyone (the simple constant policy). The locked targeting policy did not beat it on held-out data; personalization is not justified by this evidence.

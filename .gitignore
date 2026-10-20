@@ -23,3 +23,13 @@ dist/
 
 # Final deliverable copies (assembled from reports/ and docs/)
 /outputs/
+
+# GitHub publication: local credentials and machine state
+.env
+.env.*
+!.env.example
+.aws/
+.ssh/
+.databrickscfg
+*.pem
+*.key
